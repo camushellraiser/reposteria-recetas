@@ -218,7 +218,7 @@ const data={
 
 "NIVEL 1":[
 
-["🍫","Budín de Chocolate","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 1.docx"],
+["🍫","Budín de Chocolate","recetas/PASTELERIA 1 CLASE 1.pdf"],
 ["🍪","Masas Secas de Corte","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 2.docx"],
 ["🥐","Pastel Mil Hojas con Crema Pastelera","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 3.docx"],
 ["🍓","Brownie con Helado de Crema y Coulis de Fresas","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 4.docx"],
@@ -305,7 +305,7 @@ card.className="card"
 card.dataset.title=item[1].toLowerCase()
 
 card.onclick=()=>{
-window.location.href = item[2]
+window.open(item[2], "_blank")
 }
 
 card.innerHTML=`
