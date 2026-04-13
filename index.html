@@ -274,7 +274,7 @@ const data={
 ["🍵","Medialuna de Lima y Té Matcha","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 3.docx"],
 ["📝","Examen Parcial Practico","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 4.docx"],
 ["🍪","Macaron con Frambuesas","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 5.docx"],
-["🍫","Pastel Espejo de Chocolate","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 6.docx"],
+["🍫","Pastel Espejo de Chocolate","recetas/test.html"],
 ["🟣","Sinfonía Morada","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 7.docx"],
 ["🍮","Turrón de Chocolate y Panna Cotta","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 8.docx"],
 ["🍒","Selva Negra","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 9.docx"],
@@ -305,7 +305,7 @@ card.className="card"
 card.dataset.title=item[1].toLowerCase()
 
 card.onclick=()=>{
-window.open(viewer+encodeURIComponent(base+item[2]),"_blank")
+window.location.href = item[2]
 }
 
 card.innerHTML=`
