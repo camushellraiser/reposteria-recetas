@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recetario Julia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:Poppins,system-ui;
+margin:0;
+background:linear-gradient(135deg,#fff8f5,#ffe9e2);
+color:#333;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:90px 20px 60px 20px;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+letter-spacing:-0.5px;
+}
+
+.hero p{
+opacity:.7;
+font-size:18px;
+}
+
+/* SEARCH */
+
+.search{
+max-width:520px;
+margin:35px auto;
+}
+
+.search input{
+width:100%;
+padding:16px 18px;
+border-radius:14px;
+border:none;
+font-size:16px;
+
+box-shadow:
+0 6px 16px rgba(0,0,0,.08),
+0 12px 35px rgba(0,0,0,.05);
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+/* LEVEL */
+
+.level{
+margin-bottom:70px;
+}
+
+.level h2{
+margin-bottom:25px;
+letter-spacing:1px;
+font-size:24px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:24px;
+}
+
+/* CARD */
+
+.card{
+
+background:white;
+
+padding:24px;
+
+border-radius:20px;
+
+box-shadow:
+0 6px 14px rgba(0,0,0,.06),
+0 14px 35px rgba(0,0,0,.08);
+
+cursor:pointer;
+
+transition:all .25s ease;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* glow effect */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:-40%;
+left:-40%;
+
+width:180%;
+height:180%;
+
+background:radial-gradient(circle at center, rgba(255,200,180,.25), transparent 60%);
+
+opacity:0;
+
+transition:.4s;
+
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+box-shadow:
+0 12px 28px rgba(0,0,0,.12),
+0 25px 60px rgba(0,0,0,.15);
+
+}
+
+.card:active{
+transform:scale(.97);
+}
+
+/* ICON */
+
+.icon{
+font-size:32px;
+margin-bottom:10px;
+}
+
+/* LESSON */
+
+.lesson{
+font-size:13px;
+opacity:.6;
+margin-bottom:6px;
+font-style:italic;
+}
+
+/* TITLE */
+
+.title{
+font-weight:600;
+font-size:17px;
+letter-spacing:.2px;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:40px;
+opacity:.6;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<h1>Recetario Julia 🍰</h1>
+
+<p>Escuela de Pastelería</p>
+
+<div class="search">
+
+<input id="search" placeholder="Buscar receta (ej. Maracuyá, Ópera, Tiramisú)">
+
+</div>
+
+</div>
+
+<div class="container" id="content"></div>
+
+<div class="footer">
+
+Hecho con mantequilla, azúcar y cariño.
+
+</div>
+
+<script>
+
+const base="https://camushellraiser.github.io/reposteria-julia/"
+const viewer="https://view.officeapps.live.com/op/view.aspx?src="
+
+const data={
+
+"NIVEL 1":[
+
+["🍫","Budín de Chocolate","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 1.docx"],
+["🍪","Masas Secas de Corte","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 2.docx"],
+["🥐","Pastel Mil Hojas con Crema Pastelera","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 3.docx"],
+["🍓","Brownie con Helado de Crema y Coulis de Fresas","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 4.docx"],
+["🍏","Tarta de Manzana","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 5.docx"],
+["☁️","Pavlova","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 6.docx"],
+["🍋","Pay de Limón","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 7.docx"],
+["🥐","Masa Bomba","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 8.docx"],
+["🍊","Bizcochuelo con Crema de Naranja y Vainilla","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 9.docx"],
+["🍮","Panna Cotta con Gelée de Jamaica","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 10.docx"],
+["🍬","Petit Four Secos","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 11.docx"],
+["🏆","Examen Práctico","PASTELERIA NIVEL 1 2025/PASTELERIA 1 CLASE 12 EXAMEN PRACTICO.docx"]
+
+],
+
+"NIVEL 2":[
+
+["🥭","Roll de Maracuyá y Praliné","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 1.docx"],
+["🍍","Pastel Tropical","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 2.docx"],
+["🍫","Biscuit Sacher","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 3.docx"],
+["🥐","Masa Filo","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 4.docx"],
+["🥧","Strudel con Helado de Chocolate","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 5.docx"],
+["🍎","Tarta Tatin","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 6.docx"],
+["🥭","Parfait de Mango","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 7.docx"],
+["🌋","Volcán de Chocolate","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 8.docx"],
+["🎂","Ópera","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 9.docx"],
+["🍮","Soufflé Horneado y Soufflé Helado / Crème Brûlée y Flan","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 10.docx"],
+["🍰","Plum Cake","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 11.docx"],
+["🏆","Examen: Genoise de Vainilla","PASTELERIA NIVEL 2 2025/PASTELERIA 2 CLASE 12 EXAMEN PRACTICO.docx"]
+
+],
+
+"NIVEL 3":[
+
+["💒","Pastel de Boda","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 1.docx"],
+["🎂","Pastel Decorativo con Fondant","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 2.docx"],
+["🧀","Pastel Alemán de Queso","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 3.docx"],
+["🍮","Pastel de Queso Gelificado","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 4.docx"],
+["🍫","Mousse de Chocolate y Sorbet de Naranja","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 5.docx"],
+["🥂","Mousse de Champaña","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 6.docx"],
+["☕","Tiramisú","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 7.docx"],
+["🫐","Mousse de Yoghurt con Zarzamoras","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 8.docx"],
+["🍬","Petit Fours Frescos","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 9.docx"],
+["🍭","Confitería I","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 10.docx"],
+["🍬","Confitería II","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 11.docx"],
+["🏆","Examen Pastel de Boda","PASTELERIA NIVEL 3 2025/PASTELERIA 3 CLASE 12 examen practico.docx"]
+
+],
+
+"NIVEL 4":[
+
+["🍫","Chocolate","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 1.docx"],
+["🍫","Bombón Rocher Praliné","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 2.docx"],
+["🍵","Medialuna de Lima y Té Matcha","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 3.docx"],
+["📝","Examen Parcial Practico","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 4.docx"],
+["🍪","Macaron con Frambuesas","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 5.docx"],
+["🍫","Pastel Espejo de Chocolate","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 6.docx"],
+["🟣","Sinfonía Morada","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 7.docx"],
+["🍮","Turrón de Chocolate y Panna Cotta","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 8.docx"],
+["🍒","Selva Negra","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 9.docx"],
+["🥇","Broche de Oro","PASTELERIA NIVEL 4 2025/PASTELERIA 4 CLASE 10.docx"]
+
+]
+
+}
+  
+const container=document.getElementById("content")
+
+for(let level in data){
+
+let section=document.createElement("div")
+section.className="level"
+
+let title=document.createElement("h2")
+title.textContent=level
+
+let grid=document.createElement("div")
+grid.className="grid"
+
+data[level].forEach((item,index)=>{
+
+let card=document.createElement("div")
+card.className="card"
+
+card.dataset.title=item[1].toLowerCase()
+
+card.onclick=()=>{
+window.open(viewer+encodeURIComponent(base+item[2]),"_blank")
+}
+
+card.innerHTML=`
+<div class="icon">${item[0]}</div>
+<div class="lesson">Clase ${index+1}</div>
+<div class="title">${item[1]}</div>
+`
+
+grid.appendChild(card)
+
+})
+
+section.appendChild(title)
+section.appendChild(grid)
+
+container.appendChild(section)
+
+}
+
+document.getElementById("search").addEventListener("input",function(){
+
+let q=this.value.toLowerCase()
+
+document.querySelectorAll(".card").forEach(card=>{
+
+if(card.dataset.title.includes(q)){
+card.style.display="block"
+}else{
+card.style.display="none"
+}
+
+})
+
+})
+
+</script>
+
+</body>
+</html>
